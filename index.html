@@ -17,12 +17,38 @@
     </button>
     <nav class="main-nav">
       <a href="#hero">Home</a>
-      <a href="#menu">Menu</a>
+      <a href="menu.html">Menu</a>
       <a href="#stories">Stories</a>
-      <a href="#reserve">Reserve</a>
       <a href="#contact">Visit</a>
     </nav>
+    <button class="cart-toggle" aria-label="Shopping cart">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="9" cy="21" r="1"/>
+        <circle cx="20" cy="21" r="1"/>
+        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+      </svg>
+      <span class="cart-count">0</span>
+    </button>
   </header>
+
+  <!-- Cart Panel -->
+  <div class="cart-panel">
+    <div class="cart-header">
+      <h3>Your Cart</h3>
+      <button class="cart-close">&times;</button>
+    </div>
+    <div class="cart-items">
+      <p class="empty-cart">Your cart is empty</p>
+    </div>
+    <div class="cart-footer">
+      <div class="cart-total">
+        <span>Total:</span>
+        <span class="total-price">$0.00</span>
+      </div>
+      <button class="btn primary" style="width: 100%;">Checkout</button>
+    </div>
+  </div>
+  <div class="cart-overlay"></div>
 
   <main>
     <section id="hero" class="hero">
@@ -30,86 +56,12 @@
         <h1>Welcome to Maison Lumiere</h1>
         <p class="lede">Experience exceptional French dining</p>
         <div class="hero-actions">
-          <a class="btn primary" href="#menu">View Menu</a>
-          <a class="btn ghost" href="#reserve">Reserve Table</a>
+          <a class="btn primary" href="menu.html#menu">Order Now</a>
+          <a class="btn ghost" href="menu.html#menu">View Menu</a>
         </div>
       </div>
       <div class="hero-image">
         <img src="assets/chef.png" alt="Chef">
-      </div>
-    </section>
-
-    <section id="menu" class="menu">
-      <div class="section-header">
-        <h2>Our Menu</h2>
-        <div class="filters" role="group" aria-label="Menu filters">
-          <button class="chip active" data-filter="all">All</button>
-          <button class="chip" data-filter="starters">Starters</button>
-          <button class="chip" data-filter="mains">Mains</button>
-          <button class="chip" data-filter="dessert">Dessert</button>
-        </div>
-      </div>
-      <div class="menu-grid">
-        <article class="menu-card" data-category="starters">
-          <img src="assets/dish1.jpg" alt="Charred Leek Terrine" class="menu-img">
-          <div class="tag">Starters</div>
-          <h3>Charred Leek Terrine</h3>
-          <span class="price">$14</span>
-        </article>
-        <article class="menu-card" data-category="starters">
-          <img src="assets/dish2.jpg" alt="Oyster Trio" class="menu-img">
-          <div class="tag">Starters</div>
-          <h3>Oyster Trio</h3>
-          <span class="price">$18</span>
-        </article>
-        <article class="menu-card" data-category="starters">
-          <img src="assets/dish3.jpg" alt="French Onion Soup" class="menu-img">
-          <div class="tag">Starters</div>
-          <h3>French Onion Soup</h3>
-          <span class="price">$12</span>
-        </article>
-        <article class="menu-card" data-category="mains">
-          <img src="assets/dish4.jpg" alt="Crisped Sea Bass" class="menu-img">
-          <div class="tag">Mains</div>
-          <h3>Crisped Sea Bass</h3>
-          <span class="price">$32</span>
-        </article>
-        <article class="menu-card" data-category="mains">
-          <img src="assets/dish5.jpg" alt="Wood-Fired Duck" class="menu-img">
-          <div class="tag">Mains</div>
-          <h3>Wood-Fired Duck</h3>
-          <span class="price">$36</span>
-        </article>
-        <article class="menu-card" data-category="mains">
-          <img src="assets/dish6.jpg" alt="Grilled Ribeye Steak" class="menu-img">
-          <div class="tag">Mains</div>
-          <h3>Grilled Ribeye Steak</h3>
-          <span class="price">$42</span>
-        </article>
-        <article class="menu-card" data-category="mains">
-          <img src="assets/dish7.jpg" alt="Lamb Chops" class="menu-img">
-          <div class="tag">Mains</div>
-          <h3>Lamb Chops</h3>
-          <span class="price">$38</span>
-        </article>
-        <article class="menu-card" data-category="dessert">
-          <img src="assets/dish8.jpg" alt="Crème Brûlée Tart" class="menu-img">
-          <div class="tag">Dessert</div>
-          <h3>Crème Brûlée Tart</h3>
-          <span class="price">$12</span>
-        </article>
-        <article class="menu-card" data-category="dessert">
-          <img src="assets/dish9.jpg" alt="Dark Chocolate Torte" class="menu-img">
-          <div class="tag">Dessert</div>
-          <h3>Dark Chocolate Torte</h3>
-          <span class="price">$14</span>
-        </article>
-        <article class="menu-card" data-category="dessert">
-          <img src="assets/dish10.jpg" alt="Tarte Tatin" class="menu-img">
-          <div class="tag">Dessert</div>
-          <h3>Tarte Tatin</h3>
-          <span class="price">$13</span>
-        </article>
       </div>
     </section>
 
@@ -134,51 +86,17 @@
       </div>
     </section>
 
-    <section id="reserve" class="reserve">
-      <div class="reserve-card">
-        <div class="card-copy">
-          <h2>Book Your Table</h2>
-          <ul class="details">
-            <li>Hours: Tue–Sun, 5:30–11:30 PM</li>
-            <li>Location: 214 Lantern Street</li>
-            <li>Phone: (415) 555-0147</li>
-          </ul>
-        </div>
-        <form class="reserve-form" id="reserveForm" novalidate>
-          <label for="name">Name</label>
-          <input id="name" name="name" type="text" placeholder="Your name" required>
-
-          <label for="email">Email</label>
-          <input id="email" name="email" type="email" placeholder="you@example.com" required>
-
-          <label for="date">Date</label>
-          <input id="date" name="date" type="date" required>
-
-          <label for="time">Time</label>
-          <input id="time" name="time" type="time" required>
-
-          <label for="guests">Guests</label>
-          <input id="guests" name="guests" type="number" min="1" max="10" value="2" required>
-
-          <label for="notes">Notes</label>
-          <textarea id="notes" name="notes" rows="3" placeholder="Allergies, celebrations, seating preferences"></textarea>
-
-          <button type="submit" class="btn primary">Request reservation</button>
-          <p class="form-message" id="formMessage" role="status" aria-live="polite"></p>
-        </form>
-      </div>
-    </section>
-
     <section id="contact" class="contact">
       <div class="contact-card">
         <div>
-          <p class="eyebrow">Find us</p>
-          <h2>Candlelit on Lantern Street.</h2>
           <h2>Visit Us</h2>
           <p class="muted">214 Lantern Street, District 7</p>
+          <p class="muted">Tue–Sun, 5:30–11:30 PM</p>
         </div>
         <div class="cta-group">
-          <a class="btn ghost" href="tel:+14155550147">Call
+          <a class="btn ghost" href="tel:+14155550147">Call</a>
+          <a class="btn primary" href="mailto:hello@maisonlumiere.com">Email</a>
+        </div>
       </div>
       <div class="contact-map">
         <iframe
