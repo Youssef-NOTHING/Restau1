@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maison Lumiere | Login</title>
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="site-header">
+    <div class="logo">Maison Lumiere</div>
+    <button class="nav-toggle" aria-label="Toggle navigation">
+      <span></span><span></span>
+    </button>
+    <nav class="main-nav">
+      <a href="index.html#hero">Home</a>
+      <a href="menu.html">Menu</a>
+      <a href="index.html#stories">Stories</a>
+      <a href="index.html#contact">Visit</a>
+      <a class="login-link" href="login.html">
+        <svg aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
+          <polyline points="10 17 15 12 10 7" />
+          <line x1="15" y1="12" x2="3" y2="12" />
+        </svg>
+        Login
+      </a>
+    </nav>
+    <button class="cart-toggle" aria-label="Shopping cart">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="9" cy="21" r="1"/>
+        <circle cx="20" cy="21" r="1"/>
+        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+      </svg>
+      <span class="cart-count">0</span>
+    </button>
+  </header>
+
+  <main class="auth-page">
+    <section class="auth-grid">
+      <div class="auth-panel">
+        <p class="eyebrow">Member access</p>
+        <h1>Sign in to keep your evening seamless.</h1>
+        <p class="muted">Review reservations, save your favorites, and pick up an order where you left off.</p>
+
+        <form class="auth-form" id="loginForm" novalidate>
+          <label for="loginEmail">Email</label>
+          <input id="loginEmail" name="email" type="email" placeholder="you@example.com" required>
+
+          <label for="loginPassword">Password</label>
+          <div class="password-field">
+            <input id="loginPassword" name="password" type="password" placeholder="••••••••" required>
+            <button type="button" class="toggle-password" aria-label="Toggle password visibility">Show</button>
+          </div>
+
+          <div class="auth-meta">
+            <label class="remember">
+              <input type="checkbox" name="remember">
+              <span>Remember me on this device</span>
+            </label>
+            <a class="auth-link" href="#">Forgot password?</a>
+          </div>
+
+          <button type="submit" class="btn primary full">Sign In</button>
+          <p class="auth-message" id="loginMessage" role="status" aria-live="polite"></p>
+        </form>
+
+        <p class="auth-footer">New to Maison Lumiere? <a class="auth-link" href="#">Create an account</a></p>
+      </div>
+
+      <div class="auth-side">
+        <div class="auth-spotlight">
+          <p class="eyebrow">What you get</p>
+          <h3>Everything a guest needs at a glance.</h3>
+          <div class="perk-list">
+            <div class="perk">
+              <span class="perk-dot"></span>
+              <div>
+                <strong>Upcoming tables</strong>
+                <p class="muted">See confirmations, edit party size, and share arrivals with friends.</p>
+              </div>
+            </div>
+            <div class="perk">
+              <span class="perk-dot"></span>
+              <div>
+                <strong>Order progress</strong>
+                <p class="muted">Track kitchen timing when you order ahead and get notified when ready.</p>
+              </div>
+            </div>
+            <div class="perk">
+              <span class="perk-dot"></span>
+              <div>
+                <strong>Saved preferences</strong>
+                <p class="muted">Store dietary notes so the team prepares exactly how you like.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="status-cards">
+          <div class="status-card">
+            <div class="status-row">
+              <div>
+                <p class="muted">Next reservation</p>
+                <strong>Friday · 8:15 PM</strong>
+              </div>
+              <span class="status-pill">Confirmed</span>
+            </div>
+            <p class="muted">Table for 4 · Window seats</p>
+          </div>
+          <div class="status-card">
+            <div class="status-row">
+              <div>
+                <p class="muted">Order pickup</p>
+                <strong>Duck confit + tart</strong>
+              </div>
+              <span class="status-pill soft">On schedule</span>
+            </div>
+            <p class="muted">Ready in ~12 minutes</p>
+          </div>
+          <div class="status-card inline">
+            <div>
+              <p class="muted">Rewards</p>
+              <strong>214 points</strong>
+            </div>
+            <div>
+              <p class="muted">Tonight's perks</p>
+              <strong>Complimentary digestif</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="scripts/main.js"></script>
+</body>
+</html>
