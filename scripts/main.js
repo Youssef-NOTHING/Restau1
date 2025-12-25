@@ -262,3 +262,49 @@ const observer = new IntersectionObserver(
 );
 
 fadeItems.forEach((item) => observer.observe(item));
+
+// Login form interactions
+const loginForm = document.getElementById('loginForm');
+const loginMessage = document.getElementById('loginMessage');
+const loginEmail = document.getElementById('loginEmail');
+const loginPassword = document.getElementById('loginPassword');
+const togglePasswordBtn = document.querySelector('.toggle-password');
+
+if (togglePasswordBtn && loginPassword) {
+  togglePasswordBtn.addEventListener('click', () => {
+    const isHidden = loginPassword.type === 'password';
+    loginPassword.type = isHidden ? 'text' : 'password';
+    togglePasswordBtn.textContent = isHidden ? 'Hide' : 'Show';
+  });
+}
+
+if (loginForm) {
+  loginForm.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+    if (!loginMessage || !loginEmail || !loginPassword) return;
+
+    const email = loginEmail.value.trim();
+    const password = loginPassword.value.trim();
+
+    if (!email || !password) {
+      loginMessage.style.color = '#f56262';
+      loginMessage.textContent = 'Enter your email and password to continue.';
+      return;
+    }
+
+    if (password.length < 6) {
+      loginMessage.style.color = '#f56262';
+      loginMessage.textContent = 'Password must be at least 6 characters.';
+      return;
+    }
+
+    loginMessage.style.color = '#6bcf7f';
+    loginMessage.textContent = 'Signed in. Your reservations and preferences are synced.';
+    showToast('Welcome back to Maison Lumiere');
+    loginForm.reset();
+    if (togglePasswordBtn) {
+      togglePasswordBtn.textContent = 'Show';
+      loginPassword.type = 'password';
+    }
+  });
+}
