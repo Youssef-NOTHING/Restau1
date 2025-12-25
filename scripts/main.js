@@ -4,6 +4,14 @@ const filterButtons = document.querySelectorAll('.chip');
 const menuCards = document.querySelectorAll('.menu-card');
 const form = document.getElementById('reserveForm');
 const formMessage = document.getElementById('formMessage');
+const cartToggle = document.querySelector('.cart-toggle');
+const cartPanel = document.querySelector('.cart-panel');
+const cartOverlay = document.querySelector('.cart-overlay');
+const cartClose = document.querySelector('.cart-close');
+const cartItemsContainer = document.querySelector('.cart-items');
+
+let cartCount = 0;
+let cartItems = [];
 
 function toggleNav() {
   nav.classList.toggle('open');
@@ -22,6 +30,61 @@ nav?.addEventListener('click', (evt) => {
     closeNav();
   }
 });
+
+// Cart functionality
+function toggleCart() {
+  cartPanel.classList.toggle('open');
+  cartOverlay.classList.toggle('open');
+}
+
+function closeCart() {
+  cartPanel.classList.remove('open');
+  cartOverlay.classList.remove('open');
+}
+
+if (cartToggle) {
+  cartToggle.addEventListener('click', toggleCart);
+}
+
+if (cartClose) {
+  cartClose.addEventListener('click', closeCart);
+}
+
+if (cartOverlay) {
+  cartOverlay.addEventListener('click', closeCart);
+}
+
+function updateCartDisplay() {
+  const cartBadge = document.querySelector('.cart-count');
+  if (cartBadge) {
+    cartBadge.textContent = cartCount;
+  }
+  
+  if (cartItems.length === 0) {
+    cartItemsContainer.innerHTML = '<p class="empty-cart">Your cart is empty</p>';
+  } else {
+    cartItemsContainer.innerHTML = cartItems.map((item, idx) => `
+      <div class="cart-item">
+        <img src="${item.image}" alt="${item.name}" class="cart-item-image">
+        <div class="cart-item-info">
+          <div class="cart-item-name">${item.name}</div>
+          <div class="cart-item-price">${item.price}</div>
+        </div>
+        <button class="cart-item-remove" onclick="removeCartItem(${idx})">×</button>
+      </div>
+    `).join('');
+  }
+  
+  const total = cartItems.reduce((sum, item) => sum + parseFloat(item.price.replace('$', '')), 0);
+  document.querySelector('.total-price').textContent = '$' + total.toFixed(2);
+}
+
+function removeCartItem(index) {
+  cartItems.splice(index, 1);
+  cartCount--;
+  updateCartDisplay();
+  showToast('Item removed from cart');
+}
 
 document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
   anchor.addEventListener('click', (evt) => {
@@ -47,6 +110,107 @@ filterButtons.forEach((btn) => {
     });
   });
 });
+
+// Buy Now functionality
+document.querySelectorAll('.buy-btn').forEach((btn) => {
+  btn.addEventListener('click', () => {
+    const card = btn.closest('.menu-card');
+    const dishName = card.querySelector('h3').textContent;
+    const dishPrice = card.querySelector('.price').textContent;
+    const dishImage = card.querySelector('.menu-img').src;
+    
+    cartItems.push({
+      name: dishName,
+      price: dishPrice,
+      image: dishImage
+    });
+    
+    cartCount++;
+    updateCartDisplay();
+    
+    showToast(`${dishName} added to cart!`);
+  });
+});
+
+// Details functionality
+document.querySelectorAll('.details-btn').forEach((btn) => {
+  btn.addEventListener('click', () => {
+    const card = btn.closest('.menu-card');
+    const dishName = card.querySelector('h3').textContent;
+    const dishTag = card.querySelector('.tag').textContent;
+    const dishPrice = card.querySelector('.price').textContent;
+    const dishImg = card.querySelector('.menu-img').src;
+    
+    showDetailsModal(dishName, dishTag, dishPrice, dishImg);
+  });
+});
+
+function showToast(message) {
+  const toast = document.createElement('div');
+  toast.className = 'toast';
+  toast.textContent = message;
+  document.body.appendChild(toast);
+  
+  setTimeout(() => {
+    toast.classList.add('show');
+  }, 10);
+  
+  setTimeout(() => {
+    toast.classList.remove('show');
+    setTimeout(() => toast.remove(), 300);
+  }, 3000);
+}
+
+function showDetailsModal(name, category, price, image) {
+  // Remove existing modal if any
+  const existing = document.querySelector('.modal-overlay');
+  if (existing) existing.remove();
+  
+  const overlay = document.createElement('div');
+  overlay.className = 'modal-overlay';
+  
+  const modal = document.createElement('div');
+  modal.className = 'modal';
+  modal.innerHTML = `
+    <button class="modal-close">&times;</button>
+    <div class="modal-content">
+      <img src="${image}" alt="${name}" class="modal-image">
+      <div class="modal-body">
+        <span class="modal-tag">${category}</span>
+        <h2>${name}</h2>
+        <p class="modal-price">${price}</p>
+        <p class="modal-description">Expertly prepared with premium ingredients. Our chefs craft each dish with care and precision, bringing flavors that delight the palate.</p>
+        <button class="modal-buy-btn">Add to Cart</button>
+      </div>
+    </div>
+  `;
+  
+  overlay.appendChild(modal);
+  document.body.appendChild(overlay);
+  
+  // Close modal functionality
+  const closeBtn = modal.querySelector('.modal-close');
+  closeBtn.addEventListener('click', () => overlay.remove());
+  
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) overlay.remove();
+  });
+  
+  // Add to cart from modal
+  const modalBuyBtn = modal.querySelector('.modal-buy-btn');
+  modalBuyBtn.addEventListener('click', () => {
+    cartItems.push({
+      name: name,
+      price: price,
+      image: image
+    });
+    
+    cartCount++;
+    updateCartDisplay();
+    showToast(`${name} added to cart!`);
+    overlay.remove();
+  });
+}
 
 function validateForm(data) {
   const errors = [];
